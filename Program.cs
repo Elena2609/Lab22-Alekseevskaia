@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 //Перебор пар
 void PrintFrequencies (Dictionary<string, int> frequencies)
@@ -111,3 +112,45 @@ else
     Console.WriteLine("Слово не найдено");
 } 
 
+//13. Самостоятельное задание
+//Вариант 3. Самые частые слова
+List<string> FindMostFrequentWords(Dictionary<string, int> frequencies)
+{
+    List<string> res = new List<string>();
+    if (frequencies.Count == 0)
+    {
+        return res;
+    }
+
+    int maxFrequency = 0;
+    foreach (KeyValuePair<string, int> entry in frequencies)
+    {
+        if (entry.Value > maxFrequency)
+        {
+            maxFrequency = entry.Value;
+        }
+    }
+
+    foreach (KeyValuePair<string, int> entry in frequencies)
+    {
+        if (entry.Value == maxFrequency)
+        {
+            res.Add(entry.Key);
+        }
+    } 
+    return res;
+}
+
+List<string> mostFrequent = FindMostFrequentWords(frequencies);
+
+if (mostFrequent.Count == 0)
+{
+    Console.WriteLine("Нет слов для анализа");
+} else
+{
+    Console.WriteLine($"Слов с максимальной частотой: {mostFrequent.Count}");
+    foreach(string word in mostFrequent)
+    {
+        Console.WriteLine($"{word}: {frequencies[word]}");
+    }
+}
